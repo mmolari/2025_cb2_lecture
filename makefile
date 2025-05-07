@@ -11,4 +11,9 @@ results/tree.nwk: results/h3n2_coding.aln.fa
 notes/%.pdf: %.ipynb
 	conda run -n teaching jupyter nbconvert --to pdf --no-input --output-dir notes $<
 
-all: notes/n01_alignment.pdf notes/n02_tree.pdf notes/n03_rooting_trees.pdf
+# concatenate pdf files
+lecture_notes.pdf: notes/n01_alignment.pdf notes/n02_tree.pdf notes/n03_rooting_trees.pdf
+	pdfunite $^ $@
+
+all: lecture_notes.pdf
+
